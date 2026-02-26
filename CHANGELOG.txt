@@ -13,7 +13,11 @@ KNOWN ISSUES:
  - Ragdoll just teleports around.
 
  
-
+ 
+ --- 2.0.1 --- 26.02.2026 --- Hotfix --- 
+Fixed dedicated servers not generating any traps.
+Increased nearby item sync batch size.
+Improved item condition sync.
 
  --- 2.0.0 --- 26.02.2026 --- Cooperation Enforcement Update --- 
 Ported to the game version v5.1
