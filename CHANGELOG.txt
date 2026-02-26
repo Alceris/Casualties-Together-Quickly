@@ -1,20 +1,138 @@
-"Casualties: Unknown" Co-op mod by Krokosha666
+"Casualties: Together" Co-Op Mod by Krokosha666 for game "Casualties: Unknown"
 Official link: https://github.com/Krokosha666/cas-unk-krokosha-multiplayer-coop
 (my abandoned YT channel): https://www.youtube.com/@Krokosha666
-
+buymeacoffee: https://buymeacoffee.com/krokosha666
 
 
 KNOWN ISSUES:
  - Save system does not work.
  - Extreme lag for clients.
  - Extreme lag with larger time scale.
- - Optimization doesn't really exist rn, actually.
  - Gun jamming might desync
- - Worldgen is not synced at all. But my object sync streams the world to the clients pretty accurately.
- - Ragdoll just teleports around i know.
- - Sometimes world generation screen on host might freeze for like a minute and idk whyy
- - This mod entirely consists of zero-effort schizo-code written on a phone, it's a miracle that it works.
+ - Console commands are not synced. (but there is admin mode to run commands on server side)
+ - Ragdoll just teleports around.
 
+ 
+
+
+ --- 2.0.0 --- 26.02.2026 --- Cooperation Enforcement Update --- 
+Ported to the game version v5.1
+Updated BepInEx version to 5.4.23.5
+Fixed dedicated server sometimes spawning players in the void.
+Fixed players spawning in wrong place.
+Fixed landmines not exploding when too far from host.
+Fixed "Push" player interaction, now it applies velocity as intended.
+Fixed not being able to carry unconscious players.
+Fixed camera jumping when somebody spawns.
+Fixed infections always being shown on other players when you're dead.
+Fixed body workout cancel global. 
+Fixed broken cooldown for Elder Thornback bite.
+ - and all other spiders
+Fixed vomitting not applying debuffs on dedicated server.
+Added text chat distortion preview. (automatically shown while typing, if distortion is present)
+Added that console player name parser also accepts client id. (like "id:1" or "id:123")
+Added more default player colors.
+Patched phantom headhit sound.
+Patched phantom mindwipe effect.
+Patched phantom depression ambience.
+Patched trader death to properly apply mood debuff to everyone around.
+Respawning dead players now resets skills.
+Significantly improved synchronization performance.
+Adjusted object sync to properly check for container contents and player inventories.
+Improved piggybacking, (visually: ragdoll is not frozen, functionally: added ability to aim guns - piggyback turret is now a thing!).
+Compressed tile chunk and fluid chunk packets.
+Compressed object sync packets.
+Smoother player interaction menu.
+Client now actually waits for server to generate world.
+Improved dislocation minigame sync.
+"Inspect Wounds" player interaction can also be done from a custom keybind ( Default "R" )
+Proximity text chat now has text clarity falloff. (as if you can't hear people very far away)
+Removed dedicated server automatic spectator switching.
+Removed rule "ForNextLayerAllMustReachEnd" 
+Removed Lockpicking minigame cooperation sync. (cuz nah i aint syncing lockpick item)
+Replaced rule "DisableSleep" to "EnableSleep"
+Replaced rule "DisableTimeManipulation" to "EnableTimeManipulation" (btw its still broken, dont actually enable it)
+Renamed rule "SpeechImpairedTextChat" to "SpeechImpairedChat"  because it also affects voice chat.
+Renamed "CommunicateWithTheDead" to "CommunicateWithTheDeadTextchat"
+New game rule "HearingLossChat" default "true" - distorts chat according to your hearing loss, brain damage, mindwipe, ...
+Added rule "MetabolismMultiplier" to slow down hunger and thirst
+Added rule "PlayerScatterPunishDistance" default "30" (in in-game "meters" (meter * 0.3 = block) ) // to kill those who abandon their friends,  set it to 60000 to disable
+Added rule "PlayerScatterPunishMinPlayerPercent" default "51%" // 0 = disable, 1 = duo, 50 = half, 100 = everyone must stay completely together // how much players have to be around one player before scatter punishment activates // number below 50 allows players to divide into several groups if the player count is high enough
+Added rule "LayerFinishConditionPlayerPercent" default "60%" // 0 = one player, 50 = half, 100 = everyone must be at the end, 101 = disable
+Added rule "LayerFinishActivateRadlineForStragglersPlayerPercent" // 0 = one player, 50 = half, 100 = disabled // activates radline right above the last straggler when specified percent of players reach the end
+Added rule "RespawnKeepInventory" it keeps whatever stayed on ur dead body and wasnt stolen or decomposed.
+Added rule "SavePlayerStateOnDisconnect" it saves health and skills on rejoin. (but only on same level, these saves are reset on layer transitions)
+Added rule "DServerMinPlrsToStart" default "2"
+Added rule "DServerToMainMenuWhenAllDied" 
+Added rule "DServerToMainMenuWhenAllLeft" 
+Mindwipe now completely distorts chat for true mindless experience.
+ - Rule "MindwipeDisablesChat" = true;  // REQUIRES  SpeechImpairedChat and HearingLossChat
+Removed CMD arg "--ksmulti-min-plr-count"
+Witnessing a player death affects mood same as corpse.
+Witnessing a player self-harm reduces mood. (less if player is desensitized)
+ - Rule "SelfharmWitnessMoodDebuff"
+Added Voice Chat.
+ - Select any microphone.
+ - Adjust volume of your microphone.
+ - Adjust voicechat listening volume.
+ - New rule "VoicechatEnabled" 
+ - New rule "CommunicateWithTheDeadVoicechat" 
+ - New rule "VoicechatQuality" // min 0 - max 4
+Added player status icons.
+ - Typing in chat.
+ - Opening a console.
+ - Unfocusing window.
+ - Healing other players.
+Added commands:
+ - talker-on-cursor-say [string]
+ - earthquake [now/disable/enable]
+ - setpref [string] [value]   - set run settings (like loot rarity, trap amount, and others)
+ - say [string]  - send a chat message
+ - mp-chatbox-pos [float] [float] [float] [float] [float]  - set location and size of chat box
+ - mp-rule [string] [value] - same as "krok rule" but now with autocomplete
+ - mp-setplrname [player] [string]
+ - mp-setplrcolor [player] [color]
+ - mp-connect - Client Connect but through a console comand
+ - mp-starthost - Host but through a console comand
+ - mp-startserver - Dedicated server start but through a console comand
+ - mp-adminpriv - Allow clients to run commands on server and view its log
+ - mp-admin - Client: enter the server console if u have the privilege
+ - theres more i forgor
+ // these were previously exclusive to mp mod dev builds
+ - hidehud
+ - godmode
+ - zoom [number]
+ - settile [id] [optional x] [optional y]
+ - setfluid [id] [optional x] [optional y]
+Changed Version 5 features:
+ - command "heal" accepts player name -> "heal [optional player]"
+ - command "setlimbfield" accepts player name -> "setlimbfield [limb] [field] [value] [optional player]"
+ - command "setbodyfield" accepts player name -> "setbodyfield [field] [value] [optional player]"
+ - command "addxp" accepts player name
+ - command "resetskills" accepts player name
+ - command "kill" accepts player name
+ - command "alert" from server is shown globally
+ - command "tp" accepts player name -> "tp [position] [optional player]"
+ - Amputation minigame sorta remembers amputation state on the specific limb if restarted. (amputation progress state is relative to current muscle health)
+ - - Can cannibalize living players with the new rule "CanAmputateHealthyPlayers"
+ - mp3player item is a separate audiosource, it doesn't replace background music.
+ - - Clients can only choose music from the Server "custommusic" folder.
+ - - Music is just streamed, it's not being downloaded.
+Added CMD arg "--ksmulti-runcommand" // run a in-game console command in main menu after the game and mp starts // example: "--ksmulti-runcommand setpref_loot_0;log_hello_world;log_another_message_idk"
+Added CMD arg "--ksmulti-setpass" // to set a password
+
+Special thanks for participation goes to:
+ - Gary the cat - @garythecat  - Leading and hosting the playtests
+ - notamoron - @nam_7876_25172  - playtester
+ - avr - @avr_crtscc  - playtester
+ - ItsVoidSK - @itsvoidskilled  - playtester
+ - {Pixel} - @canned_pixels  - playtester
+ - Мрак 2.0 - @mrakmm  - playtester
+ - Shade - @waz2280  - playtester
+ - Dictator - @snow_5107  - playtester
+
+
+ --- 5.5.1.12 --- .02.2026 --- Pretest 5 port --- 
 
  --- 5.4.1.12 --- 04.02.2026 --- Piggyback update --- 
 Added Piggyback/Carrying other players.
@@ -33,7 +151,7 @@ Added rule "FriendlyFireCombatDismember"
 Added rule "FriendlyFireAttackerMoodDebuff"
 Updated BepInEx version to 5.4.23.4
 
- 
+
  --- 5.4.1.11 --- 24.12.2025 --- Object sync improvement --- 
 Increased object load radius.
 Fixed chat not working after playing and going back to main menu.
